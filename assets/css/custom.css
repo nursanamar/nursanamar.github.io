@@ -1,0 +1,73 @@
+
+.header {
+    background: #3a3838;
+    color: white
+}
+
+.header .container {
+    height: 100%;
+}
+
+.header img {
+    border-radius: 50%;
+}
+
+.header span {
+    letter-spacing: 8px;
+}
+
+.header .name {
+    border-right: 10px solid white;
+}
+
+.header h1 {
+    font-size: 566%;
+}
+
+.header .img-div {
+    width: 73%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.header-text {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.profil {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.header ul {
+    list-style: none;
+    padding: 0;
+}
+
+.header li {
+    display: inline;
+    margin-right: 2%;
+}
+
+.header li a {
+    color: white;
+    font-size: 190%;
+}
+
+@media (max-width : 767px) {
+    .header h1 {
+        font-size: 354%;
+        text-align: center;
+    }
+
+    .header .col-sm-8{
+        text-align: center;
+    }
+
+    .header .name {
+         border: none;
+    }
+}
