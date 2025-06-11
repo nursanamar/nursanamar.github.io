@@ -1,69 +1,109 @@
 ---
-import { getCollection } from "astro:content"
-import BlogLayout from "../layouts/BlogLayout.astro"
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
-import PostCard from "../components/PostCard.astro"
-import FeaturedCard from "../components/FeaturedCard.astro"
-import SiteOptions from "../site.config.mjs"
-
-// Get all articles and sort by publication date
-const allPosts = await getCollection("article")
-const sortedPosts = allPosts.sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
-
-// Get featured posts
-const featuredPosts = allPosts.filter((post) => post.data.featured).slice(0, 3)
-
-// Get latest posts for homepage (limit to 6)
-const latestPosts = sortedPosts.slice(0, SiteOptions.numberOfLatestPostsOnHomePage || 6)
-const showCategory = SiteOptions.showCategoryOnPosts || false
+import "../styles/global.css";
+import { Github, Instagram, Linkedin, Mail, Phone, Rss } from "@lucide/astro";
 ---
 
-<BlogLayout title=`${SiteOptions.siteTitle}`>
-  <Header />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nursan amar</title>
+    <script is:inline>
+      // Theme initialization - prevents FOUC
+      (() => {
+        const theme =
+          localStorage.getItem("theme") ??
+          (matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
 
-  <!-- Light Horizontal Bar -->
-  <hr class="border-t border-gray-200 dark:border-gray-700 my-8" />
-
-  <!-- Featured Blog Posts -->
-
-  {
-    SiteOptions.showFeaturrdPostsOnHomePage && featuredPosts.length > 0 && (
-      <section class="mb-16">
-        {SiteOptions.labels.featuredPosts && <h2 class="text-2xl font-semibold mb-8 text-center">{SiteOptions.labels.featuredPosts}</h2>}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {featuredPosts.map((post) => (
-            <FeaturedCard post={post} />
-          ))}
+        document.documentElement.classList.toggle("dark", theme === "dark");
+      })();
+    </script>
+  </head>
+  <body
+    class="bg-white text-gray-900 dark:bg-slate-900 dark:text-slate-200 transition-colors duration-300"
+  >
+    <main class="flex flex-col px-4 w-screen h-screen">
+      <header class="relative flex items-center justify-between py-4">
+        <button
+          onclick="toggleTheme()"
+          id="theme-toggle-button"
+          aria-label="Toggle theme"
+          class="absolute top-0 right-0 mt-2 mr-2 p-2 rounded-md text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors"
+        >
+          <svg
+            id="sun-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5 hidden"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+            ></path>
+          </svg>
+          <svg
+            id="moon-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5 hidden"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+            ></path>
+          </svg>
+        </button>
+      </header>
+      <section
+        class="flex flex-col md:flex-row items-center justify-center w-full h-full gap-2"
+      >
+        <div class="md:max-w-3xs h-fit max-w-xs md:p-5 px-4">
+          <img
+            class="rounded-full"
+            src="images/profil1.jpg"
+            alt="Nursan amar"
+            style="width: 100%"
+          />
         </div>
-        <hr class="border-t border-gray-200 dark:border-gray-700 my-12" />
+        <div class="h-fit md:border-l-6 pl-4 tracking-widest">
+          <h1 class="text-5xl md:text-7xl">Nursan amar</h1>
+          <span class="text-2xl md:text-2xl">Software Engineer</span>
+          <div class="flex items-center gap-4 mt-4">
+            <a href="https://github.com/nursanamar">
+              <Github />
+            </a>
+            <a
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="hello@nursanamar.com"
+              href="mailto:hello@nursanamar.com"
+            >
+              <Mail />
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=62895344271774">
+              <Phone />
+            </a>
+            <a href="https://www.linkedin.com/in/nursan-amar-ab86b0118">
+              <Linkedin />
+            </a>
+            <a href="/blog">
+              <Rss />
+            </a>
+          </div>
+        </div>
       </section>
-    )
-  }
-
-  <!-- Latest Blog Posts -->
-  <section>
-    {SiteOptions.labels.latestPosts && <h2 class="text-2xl font-semibold mb-8 text-center">{SiteOptions.labels.latestPosts}</h2>}
-    <ul class="space-y-4">
-      {latestPosts.map((post) => <PostCard post={post} showCategory={showCategory} />)}
-    </ul>
-
-    <!-- View All Posts Link -->
-    {
-      sortedPosts.length > 6 && (
-        <div class="text-center mt-8">
-          <a href="/blog/" class="inline-flex items-center px-6 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors">
-            {/* View All Posts ({sortedPosts.length}) */}
-            {SiteOptions.labels.viewAllPosts}
-            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      )
-    }
-
-    <!-- Minimal Footer -->
-    <Footer />
-  </section>
-</BlogLayout>
+    </main>
+  </body>
+  <script is:inline src="/scripts/theme-toggle.js"></script>
+</html>

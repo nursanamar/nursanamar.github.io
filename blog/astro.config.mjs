@@ -8,5 +8,4 @@ export default defineConfig({
         plugins: [tailwindcss()]
     },
     site: 'https://nursanamar.com',
-    base: 'blog',
 });

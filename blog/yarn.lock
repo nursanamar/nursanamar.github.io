@@ -400,6 +400,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@lucide/astro@^0.514.0":
+  version "0.514.0"
+  resolved "https://registry.yarnpkg.com/@lucide/astro/-/astro-0.514.0.tgz#e85d73bf2ecf32a4dc2d097c6e2b9ac3ce7b76c5"
+  integrity sha512-bHtrIBOIMnvbqtCJYTabkRfYXLPlolYk2oiVqbfio8f4gEK/t0sBqPG7pHQJSjAg++nKJsj4gdeKQAMUkNOr/Q==
+
 "@napi-rs/wasm-runtime@^0.2.10":
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/@napi-rs/wasm-runtime/-/wasm-runtime-0.2.11.tgz#192c1610e1625048089ab4e35bc0649ce478500e"
